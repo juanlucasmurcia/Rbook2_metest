@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Page not found | Trabajo 2</title>
-  <meta name="description" content="Page not found | Trabajo 2" />
+  <title>Chapter 4 Análisis exploratorio bivariado | Trabajo 2</title>
+  <meta name="description" content="Chapter 4 Análisis exploratorio bivariado | Trabajo 2" />
   <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Page not found | Trabajo 2" />
+  <meta property="og:title" content="Chapter 4 Análisis exploratorio bivariado | Trabajo 2" />
   <meta property="og:type" content="book" />
   
   
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Page not found | Trabajo 2" />
+  <meta name="twitter:title" content="Chapter 4 Análisis exploratorio bivariado | Trabajo 2" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-
+<link rel="prev" href="análisis-exploratorio-completo-de-variables-numéricas.html"/>
+<link rel="next" href="homogeneidad-de-varianzas-entre-grupos-de-origin.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -205,19 +205,94 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="page-not-found" class="section level1">
-<h1>Page not found</h1>
-<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
-<p>You may want to try searching to find the page's new location, or use
-the table of contents to find the page you are looking for.</p>
+<div id="análisis-exploratorio-bivariado" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Análisis exploratorio bivariado<a href="análisis-exploratorio-bivariado.html#an%C3%A1lisis-exploratorio-bivariado" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<ul>
+<li>Relación de mpg con las variables numéricas independientes:</li>
+</ul>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="análisis-exploratorio-bivariado.html#cb33-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb33-2"><a href="análisis-exploratorio-bivariado.html#cb33-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> displacement, <span class="at">y =</span> mpg)) <span class="sc">+</span></span>
+<span id="cb33-3"><a href="análisis-exploratorio-bivariado.html#cb33-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">&quot;#1E90FF&quot;</span>) <span class="sc">+</span></span>
+<span id="cb33-4"><a href="análisis-exploratorio-bivariado.html#cb33-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Cilindrada&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Millas por galón&quot;</span>) <span class="sc">+</span></span>
+<span id="cb33-5"><a href="análisis-exploratorio-bivariado.html#cb33-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="taller-2_files/figure-html/disp-mpg-displacement-1.png" alt="" width="672" /></p>
+<div id="interpretacion-de-la-dispercion-entre-mpg-y-cilindros" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> interpretacion de la dispercion entre mpg y cilindros<a href="análisis-exploratorio-bivariado.html#interpretacion-de-la-dispercion-entre-mpg-y-cilindros" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Se observa una relación negativa entre la cilindrada (displacement) y el rendimiento (mpg). Esto indica que, en general, a medida que aumenta la cilindrada del automóvil, disminuyen las millas por galón.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="análisis-exploratorio-bivariado.html#cb34-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb34-2"><a href="análisis-exploratorio-bivariado.html#cb34-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> horsepower, <span class="at">y =</span> mpg)) <span class="sc">+</span></span>
+<span id="cb34-3"><a href="análisis-exploratorio-bivariado.html#cb34-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">&quot;#1E90FF&quot;</span>) <span class="sc">+</span></span>
+<span id="cb34-4"><a href="análisis-exploratorio-bivariado.html#cb34-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Potencia&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Millas por galón&quot;</span>) <span class="sc">+</span></span>
+<span id="cb34-5"><a href="análisis-exploratorio-bivariado.html#cb34-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<pre><code>## Warning: Removed 6 rows containing missing values or values outside the scale range
+## (`geom_point()`).</code></pre>
+<p><img src="taller-2_files/figure-html/disp-mpg-horsepower-1.png" alt="" width="672" /></p>
+</div>
+<div id="interpretacion-de-la-dispercion-entre-mpg-y-potencia" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> interpretacion de la dispercion entre mpg y potencia<a href="análisis-exploratorio-bivariado.html#interpretacion-de-la-dispercion-entre-mpg-y-potencia" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Se observa una relación negativa entre la potencia (horsepower) y el rendimiento (mpg). En general, los automóviles con mayor potencia tienden a presentar menos millas por galón.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="análisis-exploratorio-bivariado.html#cb36-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb36-2"><a href="análisis-exploratorio-bivariado.html#cb36-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> acceleration, <span class="at">y =</span> mpg)) <span class="sc">+</span></span>
+<span id="cb36-3"><a href="análisis-exploratorio-bivariado.html#cb36-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">&quot;#1E90FF&quot;</span>) <span class="sc">+</span></span>
+<span id="cb36-4"><a href="análisis-exploratorio-bivariado.html#cb36-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Aceleración&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Millas por galón&quot;</span>) <span class="sc">+</span></span>
+<span id="cb36-5"><a href="análisis-exploratorio-bivariado.html#cb36-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="taller-2_files/figure-html/disp-mpg-acceleration-1.png" alt="" width="672" /></p>
+</div>
+<div id="interpretacion-de-la-dispercion-entre-mpg-y-aceleracion" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> interpretacion de la dispercion entre mpg y aceleracion<a href="análisis-exploratorio-bivariado.html#interpretacion-de-la-dispercion-entre-mpg-y-aceleracion" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Se observa una relación positiva moderada entre la aceleración (acceleration) y el rendimiento (mpg). En general, los automóviles con mayores valores de aceleración tienden a presentar un mayor rendimiento de combustible.</p>
+<ul>
+<li>Relación de mpg con origin:</li>
+</ul>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="análisis-exploratorio-bivariado.html#cb37-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb37-2"><a href="análisis-exploratorio-bivariado.html#cb37-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> origin, <span class="at">y =</span> mpg, <span class="at">fill =</span> origin)) <span class="sc">+</span></span>
+<span id="cb37-3"><a href="análisis-exploratorio-bivariado.html#cb37-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb37-4"><a href="análisis-exploratorio-bivariado.html#cb37-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Origen&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Millas por galón&quot;</span>) <span class="sc">+</span></span>
+<span id="cb37-5"><a href="análisis-exploratorio-bivariado.html#cb37-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="taller-2_files/figure-html/box-mpg-origin-1.png" alt="" width="672" /></p>
+</div>
+<div id="interpetacion-de-las-relaciones-entre-mpg-y-origin" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> interpetacion de las relaciones entre mpg y origin<a href="análisis-exploratorio-bivariado.html#interpetacion-de-las-relaciones-entre-mpg-y-origin" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>El gráfico muestra diferencias en el rendimiento (mpg) según el origen de los automóviles. Los vehículos de Japón presentan, en general, valores más altos de mpg, mientras que los de Estados Unidos muestran valores más bajos. Los vehículos europeos se encuentran en una posición intermedia.</p>
+<ul>
+<li>Vista global de correlaciones con GGally:</li>
+</ul>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="análisis-exploratorio-bivariado.html#cb38-1" tabindex="-1"></a><span class="fu">library</span>(GGally)</span>
+<span id="cb38-2"><a href="análisis-exploratorio-bivariado.html#cb38-2" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="análisis-exploratorio-bivariado.html#cb38-3" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb38-4"><a href="análisis-exploratorio-bivariado.html#cb38-4" tabindex="-1"></a>  <span class="fu">select</span>(mpg, cylinders, displacement, horsepower, weight, acceleration) <span class="sc">%&gt;%</span></span>
+<span id="cb38-5"><a href="análisis-exploratorio-bivariado.html#cb38-5" tabindex="-1"></a>  <span class="fu">ggpairs</span>()</span></code></pre></div>
+<pre><code>## Warning: Removed 6 rows containing missing values
+## Removed 6 rows containing missing values
+## Removed 6 rows containing missing values</code></pre>
+<pre><code>## Warning: Removed 6 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+## Removed 6 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+## Removed 6 rows containing missing values or values outside the scale range
+## (`geom_point()`).</code></pre>
+<pre><code>## Warning: Removed 6 rows containing non-finite outside the scale range
+## (`stat_density()`).</code></pre>
+<pre><code>## Warning: Removed 6 rows containing missing values
+## Removed 6 rows containing missing values</code></pre>
+<pre><code>## Warning: Removed 6 rows containing missing values or values outside the scale range
+## (`geom_point()`).
+## Removed 6 rows containing missing values or values outside the scale range
+## (`geom_point()`).</code></pre>
+<p><img src="taller-2_files/figure-html/ggpairs-auto-1.png" alt="" width="672" /></p>
+</div>
+<div id="intepretacion-de-la-matriz-de-correlacion" class="section level2 hasAnchor" number="4.5">
+<h2><span class="header-section-number">4.5</span> intepretacion de la matriz de correlacion<a href="análisis-exploratorio-bivariado.html#intepretacion-de-la-matriz-de-correlacion" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Se aprecia que mpg tiene una relación negativa con cylinders, displacement, horsepower y weight, especialmente con el peso. En cambio, acceleration presenta una relación positiva con mpg, aunque más moderada.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-
+<a href="análisis-exploratorio-completo-de-variables-numéricas.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="homogeneidad-de-varianzas-entre-grupos-de-origin.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -248,7 +323,7 @@ gitbook.start({
     "size": 2
   },
   "edit": {
-    "link": "https://github.com/USERNAME/REPO/edit/BRANCH/%s",
+    "link": "https://github.com/USERNAME/REPO/edit/BRANCH/01-intro.Rmd",
     "text": "Edit"
   },
   "history": {
