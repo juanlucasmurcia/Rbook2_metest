@@ -1,0 +1,55 @@
+--- 
+title: "Trabajo 2"
+author: "Juan Lucas Murcias Solano y Valentina Arias Cortez"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+link-citations: yes
+github-repo: rstudio/bookdown-demo
+---
+
+
+# Trabajo 2 
+
+Se nos hace entrega de un Dataset "car" donde a simple vista se puede evidenciar 
+diferentes marcas de veiculos automotris con su respectiva informacion mecanica. El conjunto de datos contiene 399 filas y 9 características.
+
+
+## contenido
+
+El conjunto de datos consta de las siguientes columnas:
+
+Name: Identificador único de cada automóvil.
+
+MPG: Eficiencia de combustible medida en millas por galón.
+
+Cylinders: Número de cilindros del motor.
+
+Displacement: Cilindrada del motor, que indica su tamaño o capacidad.
+
+Horsepower: Potencia del motor.
+
+Weight: Peso del automóvil.
+
+Acceleration: Capacidad para aumentar la velocidad, medida en segundos.
+
+Model Year: Año de fabricación del modelo de automóvil.
+
+Origin: País o región de origen de cada automóvil.
+
+## Objetivo General
+
+Analizar el rendimiento de combustible (mpg) en el conjunto de datos de automóviles (Automobile) mediante técnicas descriptivas e inferencia estadística, identificando sus principales factores determinantes mecánicos y de procedencia.
+
+## Objetivos Específicos
+
+$1$. Explorar y describir la estructura general del dataset: Identificar tipos de datos, limpiar valores faltantes en las variables e inspeccionar las medidas de tendencia central y dispersión del rendimiento (mpg).
+
+$2$. Visualizar el comportamiento y distribución de los datos: Elaborar e interpretar histogramas, diagramas de caja y diagramas de dispersión para detectar asimetrías, valores atípicos y patrones de relación entre variables clave (como peso vs. rendimiento).
+
+$3$. Evaluar los supuestos distribucionales de las variables: Aplicar la prueba de normalidad de Shapiro-Wilk sobre la variable de respuesta (mpg) para definir el uso apropiado de métodos paramétricos o no paramétricos.
+
+$4$. Analizar la asociación entre el peso y el rendimiento vehicular: Determinar la significancia estadística y la intensidad de la correlación entre las variables cuantitativas weight y mpg.
+
+$5$. Comparar el rendimiento de combustible según la región de origen: Evaluar mediante pruebas de hipótesis (Kruskal-Wallis / ANOVA) si existen diferencias estadísticamente significativas en la media/mediana del rendimiento (mpg) según la variable cualitativa origin.

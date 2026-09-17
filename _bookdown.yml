@@ -1,0 +1,10 @@
+book_filename: "taller 2"
+language:
+  ui:
+    chapter_name: "Chapter "
+delete_merged_file: true
+output_dir: "libro"
+
+rmd_files:
+  - index.Rmd
+  - 01-intro.Rmd
