@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Trabajo 2</title>
+  <meta name="description" content="Trabajo 2" />
+  <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Trabajo 2" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Trabajo 2" />
+  
+  
+  
+
+<meta name="author" content="Juan Lucas Murcias Solano y Valentina Arias Cortez" />
+
+
+<meta name="date" content="2026-09-16" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="dataset-car.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Trabajo 2</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#contenido"><i class="fa fa-check"></i><b>1.1</b> contenido</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#objetivo-general"><i class="fa fa-check"></i><b>1.2</b> Objetivo General</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#objetivos-espec%C3%ADficos"><i class="fa fa-check"></i><b>1.3</b> Objetivos Específicos</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="dataset-car.html"><a href="dataset-car.html"><i class="fa fa-check"></i><b>2</b> Dataset “car”</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="dataset-car.html"><a href="dataset-car.html#librer%C3%ADa"><i class="fa fa-check"></i><b>2.1</b> Librería</a></li>
+<li class="chapter" data-level="2.2" data-path="dataset-car.html"><a href="dataset-car.html#datos"><i class="fa fa-check"></i><b>2.2</b> Datos</a></li>
+<li class="chapter" data-level="2.3" data-path="dataset-car.html"><a href="dataset-car.html#exploratorio-con-parte-inferencial"><i class="fa fa-check"></i><b>2.3</b> exploratorio con parte inferencial</a></li>
+<li class="chapter" data-level="2.4" data-path="dataset-car.html"><a href="dataset-car.html#an%C3%A1lisis-exploratorio-completo-de-variables-num%C3%A9ricas"><i class="fa fa-check"></i><b>2.4</b> Análisis exploratorio completo de variables numéricas</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="dataset-car.html"><a href="dataset-car.html#an%C3%A1lisis-exploratorio-bivariado"><i class="fa fa-check"></i><b>2.4.1</b> Análisis exploratorio bivariado</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="dataset-car.html"><a href="dataset-car.html#homogeneidad-de-varianzas-entre-grupos-de-origin"><i class="fa fa-check"></i><b>2.5</b> Homogeneidad de varianzas entre grupos de origin</a></li>
+<li class="chapter" data-level="2.6" data-path="dataset-car.html"><a href="dataset-car.html#comparaciones-post-hoc-del-kruskal-wallis"><i class="fa fa-check"></i><b>2.6</b> Comparaciones Post-Hoc del Kruskal-Wallis</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="dataset-car.html"><a href="dataset-car.html#comparaci%C3%B3n-espec%C3%ADfica-ee.uu.-vs-jap%C3%B3n"><i class="fa fa-check"></i><b>2.6.1</b> Comparación específica: EE.UU. vs Japón</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="dataset-car.html"><a href="dataset-car.html#tabla-de-contingencia-cylinders-vs-origin"><i class="fa fa-check"></i><b>2.7</b> Tabla de contingencia: cylinders vs origin</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Trabajo 2</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Trabajo 2</h1>
+<p class="author"><em>Juan Lucas Murcias Solano y Valentina Arias Cortez</em></p>
+<p class="date"><em>2026-09-16</em></p>
+</div>
+<div id="trabajo-2" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">Chapter 1</span> Trabajo 2<a href="index.html#trabajo-2" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Se nos hace entrega de un Dataset “car” donde a simple vista se puede evidenciar
+diferentes marcas de veiculos automotris con su respectiva informacion mecanica. El conjunto de datos contiene 399 filas y 9 características.</p>
+<div id="contenido" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> contenido<a href="index.html#contenido" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>El conjunto de datos consta de las siguientes columnas:</p>
+<p>Name: Identificador único de cada automóvil.</p>
+<p>MPG: Eficiencia de combustible medida en millas por galón.</p>
+<p>Cylinders: Número de cilindros del motor.</p>
+<p>Displacement: Cilindrada del motor, que indica su tamaño o capacidad.</p>
+<p>Horsepower: Potencia del motor.</p>
+<p>Weight: Peso del automóvil.</p>
+<p>Acceleration: Capacidad para aumentar la velocidad, medida en segundos.</p>
+<p>Model Year: Año de fabricación del modelo de automóvil.</p>
+<p>Origin: País o región de origen de cada automóvil.</p>
+</div>
+<div id="objetivo-general" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Objetivo General<a href="index.html#objetivo-general" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Analizar el rendimiento de combustible (mpg) en el conjunto de datos de automóviles (Automobile) mediante técnicas descriptivas e inferencia estadística, identificando sus principales factores determinantes mecánicos y de procedencia.</p>
+</div>
+<div id="objetivos-específicos" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Objetivos Específicos<a href="index.html#objetivos-espec%C3%ADficos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><span class="math inline">\(1\)</span>. Explorar y describir la estructura general del dataset: Identificar tipos de datos, limpiar valores faltantes en las variables e inspeccionar las medidas de tendencia central y dispersión del rendimiento (mpg).</p>
+<p><span class="math inline">\(2\)</span>. Visualizar el comportamiento y distribución de los datos: Elaborar e interpretar histogramas, diagramas de caja y diagramas de dispersión para detectar asimetrías, valores atípicos y patrones de relación entre variables clave (como peso vs. rendimiento).</p>
+<p><span class="math inline">\(3\)</span>. Evaluar los supuestos distribucionales de las variables: Aplicar la prueba de normalidad de Shapiro-Wilk sobre la variable de respuesta (mpg) para definir el uso apropiado de métodos paramétricos o no paramétricos.</p>
+<p><span class="math inline">\(4\)</span>. Analizar la asociación entre el peso y el rendimiento vehicular: Determinar la significancia estadística y la intensidad de la correlación entre las variables cuantitativas weight y mpg.</p>
+<p><span class="math inline">\(5\)</span>. Comparar el rendimiento de combustible según la región de origen: Evaluar mediante pruebas de hipótesis (Kruskal-Wallis / ANOVA) si existen diferencias estadísticamente significativas en la media/mediana del rendimiento (mpg) según la variable cualitativa origin.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="dataset-car.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/USERNAME/REPO/edit/BRANCH/index.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["taller 2.pdf", "taller 2.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
