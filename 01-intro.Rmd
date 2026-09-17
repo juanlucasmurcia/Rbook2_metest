@@ -18,8 +18,10 @@ library(coin)
 
 ```{r visualizacion de los datos}
 df <- read.csv("C:/Users/Juan Lucas Murcia S/Desktop/Metodos estadisticos/trabajo 2/Automobile.csv")
-
 df
+
+#valores faltantes
+colSums(is.na(df))
 
 # primeras filas
 head(df)
@@ -31,16 +33,16 @@ str(df)
 # resumen estadístico
 summary(df)
 ```
+## interpretacion de los datos 
 
-## exploratorio con parte inferencial
+El conjunto de datos tiene **398 automóviles y 9 variables**. Se encontraron **6 valores faltantes en `horsepower`**, mientras que las demás variables no presentan datos faltantes. En general, los automóviles muestran bastante variación en características como el peso, la cilindrada, la potencia y el rendimiento (`mpg`).
 
-Se realizó una revisión de los valores faltantes mediante la función "is.na()". Posteriormente, "colSums()" permitió identificar la cantidad de valores ausentes en cada variable. Se encontraron 6 valores faltantes en horsepower, mientras que las demás variables no presentan valores faltantes.
 
-## Análisis exploratorio completo de variables numéricas
+# Análisis exploratorio completo de variables numéricas
 
 - Asegurémonos de que horsepower esté en formato numérico (en el archivo original los faltantes vienen como "?"):
 
-```{r}
+```{r elementos faltantes}
 df <- df %>%
   mutate(horsepower = as.numeric(horsepower))
 ```
@@ -65,6 +67,10 @@ df %>%
     .groups = "drop"
   )
 ```
+## interpretacion de resumen estadistico 
+
+se observa una variabilidad considerable entre los automóviles, especialmente en variables como displacement, horsepower y weight. Además, las diferencias entre la media y la mediana en algunas variables indican que sus datos no están distribuidos de manera completamente simétrica.
+
 
 - Diagramas de cajas y bigotes de cada variable:
 
@@ -89,6 +95,11 @@ p5 <- df %>% ggplot(aes(x = "", y = acceleration)) +
 (p1 + p2 + p3) / (p4 + p5)
 ```
 
+## interpretacion del boxplots
+
+Se observa mayor dispersión en cilindrada, potencia y peso, además de varios valores atípicos. En cylinders la mayoría de los vehículos se concentra entre 4 y 6 cilindros, mientras que acceleration presenta una distribución más concentrada.
+
+
 - Tabla de frecuencias de cylinders:
 
 
@@ -97,6 +108,10 @@ df %>%
   count(cylinders, name = "Frecuencia") %>%
   mutate(Porcentaje = round(Frecuencia / sum(Frecuencia) * 100, 2))
 ```
+## intepretacion de la tabla de frecuencia de los cilindros
+
+La tabla muestra que la mayoría de los automóviles tienen 4 cilindros, con 204 vehículos, que representan el 51.26% de la muestra. Le siguen los vehículos de 8 cilindros con 25.88% y los de 6 cilindros con 21.11%. Los vehículos de 3 y 5 cilindros son poco frecuentes.
+
 
 - Tabla de frecuencias de origin:
 
@@ -105,8 +120,11 @@ df %>%
   count(origin, name = "Frecuencia") %>%
   mutate(Porcentaje = round(Frecuencia / sum(Frecuencia) * 100, 2))
 ```
+## interpretacion de la tabla de frecuencia de origin 
 
-### Análisis exploratorio bivariado
+La tabla muestra que la mayoría de los automóviles son de Estados Unidos seguido de japon y europa
+
+# Análisis exploratorio bivariado
 
 - Relación de mpg con las variables numéricas independientes:
 
@@ -114,30 +132,40 @@ df %>%
 df %>%
   ggplot(aes(x = displacement, y = mpg)) +
   geom_point(alpha = 0.5, color = "#1E90FF") +
-  geom_smooth(method = "lm", se = FALSE, color = "red") +
   labs(x = "Cilindrada", y = "Millas por galón") +
   theme_bw()
 ```
+
+## interpretacion de la dispercion entre mpg y cilindros
+
+Se observa una relación negativa entre la cilindrada (displacement) y el rendimiento (mpg). Esto indica que, en general, a medida que aumenta la cilindrada del automóvil, disminuyen las millas por galón.
 
 
 ```{r disp-mpg-horsepower}
 df %>%
   ggplot(aes(x = horsepower, y = mpg)) +
   geom_point(alpha = 0.5, color = "#1E90FF") +
-  geom_smooth(method = "lm", se = FALSE, color = "red") +
   labs(x = "Potencia", y = "Millas por galón") +
   theme_bw()
 ```
+
+## interpretacion de la dispercion entre mpg y potencia
+
+Se observa una relación negativa entre la potencia (horsepower) y el rendimiento (mpg). En general, los automóviles con mayor potencia tienden a presentar menos millas por galón.
 
 
 ```{r disp-mpg-acceleration}
 df %>%
   ggplot(aes(x = acceleration, y = mpg)) +
   geom_point(alpha = 0.5, color = "#1E90FF") +
-  geom_smooth(method = "lm", se = FALSE, color = "red") +
   labs(x = "Aceleración", y = "Millas por galón") +
   theme_bw()
 ```
+
+## interpretacion de la dispercion entre mpg y aceleracion
+
+Se observa una relación positiva moderada entre la aceleración (acceleration) y el rendimiento (mpg). En general, los automóviles con mayores valores de aceleración tienden a presentar un mayor rendimiento de combustible.
+
 
 - Relación de mpg con origin:
 
@@ -149,6 +177,11 @@ df %>%
   theme_bw()
 ```
 
+## interpetacion de las relaciones entre mpg y origin
+
+El gráfico muestra diferencias en el rendimiento (mpg) según el origen de los automóviles. Los vehículos de Japón presentan, en general, valores más altos de mpg, mientras que los de Estados Unidos muestran valores más bajos. Los vehículos europeos se encuentran en una posición intermedia.
+
+
 - Vista global de correlaciones con GGally:
 
 ```{r ggpairs-auto}
@@ -159,31 +192,50 @@ df %>%
   ggpairs()
 ```
 
-## Homogeneidad de varianzas entre grupos de origin
+## intepretacion de la matriz de correlacion
+
+Se aprecia que mpg tiene una relación negativa con cylinders, displacement, horsepower y weight, especialmente con el peso. En cambio, acceleration presenta una relación positiva con mpg, aunque más moderada.
+
+
+# Homogeneidad de varianzas entre grupos de origin
 
 ```{r levene-mpg-origin}
 library(car)
 leveneTest(mpg ~ origin, data = df, center = "median")
 ```
 
-## Comparaciones Post-Hoc del Kruskal-Wallis
+## interpretacion del levene test 
+
+Se obtuvo un valor p de aproximadamente 0.905, que es mayor a 0.05. Por lo tanto, no se encuentran diferencias significativas entre las varianzas de los grupos.
+
+# Comparaciones Post-Hoc del Kruskal-Wallis
 
 Dado que el test de Kruskal-Wallis solo indica que existe diferencia entre algún grupo, se aplica una comparación por pares para identificar cuáles orígenes difieren entre sí:
 
-```{rposthoc-kruskal}
+```{r posthoc-kruskal}
 pairwise.wilcox.test(df$mpg, df$origin, p.adjust.method = "bonferroni")
 ```
 
-### Comparación específica: EE.UU. vs Japón
+## interpretacion del kruskal 
+
+Después de aplicar la corrección de Bonferroni, se encontraron diferencias significativas entre Estados Unidos y Japón, Estados Unidos y Europa, y también entre Japón y Europa, ya que los valores p son menores a 0.05. Esto indica que el rendimiento de los automóviles presenta diferencias según su origen.
+
+
+# Comparación específica: EE.UU. vs Japón
 
 Dado que mpg no presenta comportamiento normal (verificado previamente con Shapiro-Wilk), se utiliza la prueba de Mann-Whitney en lugar del t-test:
 
-```{rwilcox-usa-japon}
+```{r wilcox-usa-japon}
 usa   <- df %>% filter(origin == "usa") %>% pull(mpg)
 japon <- df %>% filter(origin == "japan") %>% pull(mpg)
 
 wilcox.test(usa, japon)
 ```
+
+## interpretacion del wilcox
+
+El valor p obtenido es mucho menor que 0.05, por lo que existe una diferencia estadísticamente significativa entre ambos grupos.
+
 
 - Tamaño del efecto:
 
@@ -196,9 +248,12 @@ df %>%
   wilcox_effsize(mpg ~ origin)
 ```
 
+## interpretacin de el tamaño del efecto
+
+El tamaño del efecto de la prueba de Wilcoxon entre los automóviles de Estados Unidos y Japón fue de aproximadamente r = 0.55. Esto indica que existe una diferencia de magnitud moderada entre ambos grupos en cuanto al rendimiento (mpg).
 
 
-## Tabla de contingencia: cylinders vs origin
+# Tabla de contingencia: cylinders vs origin
 
 Se evalúa si el número de cilindros está asociado con el origen del vehículo:
 
@@ -211,3 +266,6 @@ tabla_cyl_origin
 chisq.test(tabla_cyl_origin, simulate.p.value = TRUE, B = 10000)
 ```
 
+## interpretacion de la tabla de contingencia 
+
+La prueba de Chi-cuadrado, utilizando una simulación de 10.000 repeticiones, obtuvo un valor p menor que 0.05. Por lo tanto, existe una asociación estadísticamente significativa entre el número de cilindros y el origen del automóvil.
