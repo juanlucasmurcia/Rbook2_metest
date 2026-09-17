@@ -1,0 +1,14 @@
+trabajo-2
+contenido
+objetivo-general
+objetivos-específicos
+dataset-car
+librería
+datos
+exploratorio-con-parte-inferencial
+análisis-exploratorio-completo-de-variables-numéricas
+análisis-exploratorio-bivariado
+homogeneidad-de-varianzas-entre-grupos-de-origin
+comparaciones-post-hoc-del-kruskal-wallis
+comparación-específica-ee.uu.-vs-japón
+tabla-de-contingencia-cylinders-vs-origin
