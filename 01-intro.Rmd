@@ -1,0 +1,213 @@
+# Dataset "car"
+
+## Librería
+
+```{r echo=FALSE}
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(patchwork)
+library(GGally)
+library(car)
+library(rstatix)
+library(coin)
+```
+
+## Datos
+
+
+```{r visualizacion de los datos}
+df <- read.csv("C:/Users/Juan Lucas Murcia S/Desktop/Metodos estadisticos/trabajo 2/Automobile.csv")
+
+df
+
+# primeras filas
+head(df)
+
+# dimencion y estructura
+dim(df)
+str(df)
+
+# resumen estadístico
+summary(df)
+```
+
+## exploratorio con parte inferencial
+
+Se realizó una revisión de los valores faltantes mediante la función "is.na()". Posteriormente, "colSums()" permitió identificar la cantidad de valores ausentes en cada variable. Se encontraron 6 valores faltantes en horsepower, mientras que las demás variables no presentan valores faltantes.
+
+## Análisis exploratorio completo de variables numéricas
+
+- Asegurémonos de que horsepower esté en formato numérico (en el archivo original los faltantes vienen como "?"):
+
+```{r}
+df <- df %>%
+  mutate(horsepower = as.numeric(horsepower))
+```
+
+- Resumen estadístico de todas las variables numéricas:
+
+```{r resumen-numericas-completo}
+df %>%
+  select(mpg, cylinders, displacement, horsepower, weight, acceleration, model_year) %>%
+  pivot_longer(everything(), names_to = "variable", values_to = "valor") %>%
+  group_by(variable) %>%
+  summarise(
+    n = sum(!is.na(valor)),
+    media = mean(valor, na.rm = TRUE),
+    ds = sd(valor, na.rm = TRUE),
+    mediana = median(valor, na.rm = TRUE),
+    minimo = min(valor, na.rm = TRUE),
+    maximo = max(valor, na.rm = TRUE),
+    Q1 = quantile(valor, 0.25, na.rm = TRUE),
+    Q3 = quantile(valor, 0.75, na.rm = TRUE),
+    IQR = IQR(valor, na.rm = TRUE),
+    .groups = "drop"
+  )
+```
+
+- Diagramas de cajas y bigotes de cada variable:
+
+```{r boxplots-numericas}
+library(patchwork)
+
+p1 <- df %>% ggplot(aes(x = "", y = cylinders)) +
+  geom_boxplot(fill = "#1f77b4", alpha = 0.7) + labs(x = "", y = "Cilindros") + theme_bw()
+
+p2 <- df %>% ggplot(aes(x = "", y = displacement)) +
+  geom_boxplot(fill = "#2ca02c", alpha = 0.7) + labs(x = "", y = "Cilindrada") + theme_bw()
+
+p3 <- df %>% ggplot(aes(x = "", y = horsepower)) +
+  geom_boxplot(fill = "#d62728", alpha = 0.7) + labs(x = "", y = "Potencia") + theme_bw()
+
+p4 <- df %>% ggplot(aes(x = "", y = weight)) +
+  geom_boxplot(fill = "#9467bd", alpha = 0.7) + labs(x = "", y = "Peso") + theme_bw()
+
+p5 <- df %>% ggplot(aes(x = "", y = acceleration)) +
+  geom_boxplot(fill = "#ff7f0e", alpha = 0.7) + labs(x = "", y = "Aceleración") + theme_bw()
+
+(p1 + p2 + p3) / (p4 + p5)
+```
+
+- Tabla de frecuencias de cylinders:
+
+
+```{r tabla-cylinders}
+df %>%
+  count(cylinders, name = "Frecuencia") %>%
+  mutate(Porcentaje = round(Frecuencia / sum(Frecuencia) * 100, 2))
+```
+
+- Tabla de frecuencias de origin:
+
+```{r tabla-origin}
+df %>%
+  count(origin, name = "Frecuencia") %>%
+  mutate(Porcentaje = round(Frecuencia / sum(Frecuencia) * 100, 2))
+```
+
+### Análisis exploratorio bivariado
+
+- Relación de mpg con las variables numéricas independientes:
+
+```{r disp-mpg-displacement}
+df %>%
+  ggplot(aes(x = displacement, y = mpg)) +
+  geom_point(alpha = 0.5, color = "#1E90FF") +
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  labs(x = "Cilindrada", y = "Millas por galón") +
+  theme_bw()
+```
+
+
+```{r disp-mpg-horsepower}
+df %>%
+  ggplot(aes(x = horsepower, y = mpg)) +
+  geom_point(alpha = 0.5, color = "#1E90FF") +
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  labs(x = "Potencia", y = "Millas por galón") +
+  theme_bw()
+```
+
+
+```{r disp-mpg-acceleration}
+df %>%
+  ggplot(aes(x = acceleration, y = mpg)) +
+  geom_point(alpha = 0.5, color = "#1E90FF") +
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  labs(x = "Aceleración", y = "Millas por galón") +
+  theme_bw()
+```
+
+- Relación de mpg con origin:
+
+```{r box-mpg-origin}
+df %>%
+  ggplot(aes(x = origin, y = mpg, fill = origin)) +
+  geom_boxplot(alpha = 0.7) +
+  labs(x = "Origen", y = "Millas por galón") +
+  theme_bw()
+```
+
+- Vista global de correlaciones con GGally:
+
+```{r ggpairs-auto}
+library(GGally)
+
+df %>%
+  select(mpg, cylinders, displacement, horsepower, weight, acceleration) %>%
+  ggpairs()
+```
+
+## Homogeneidad de varianzas entre grupos de origin
+
+```{r levene-mpg-origin}
+library(car)
+leveneTest(mpg ~ origin, data = df, center = "median")
+```
+
+## Comparaciones Post-Hoc del Kruskal-Wallis
+
+Dado que el test de Kruskal-Wallis solo indica que existe diferencia entre algún grupo, se aplica una comparación por pares para identificar cuáles orígenes difieren entre sí:
+
+```{rposthoc-kruskal}
+pairwise.wilcox.test(df$mpg, df$origin, p.adjust.method = "bonferroni")
+```
+
+### Comparación específica: EE.UU. vs Japón
+
+Dado que mpg no presenta comportamiento normal (verificado previamente con Shapiro-Wilk), se utiliza la prueba de Mann-Whitney en lugar del t-test:
+
+```{rwilcox-usa-japon}
+usa   <- df %>% filter(origin == "usa") %>% pull(mpg)
+japon <- df %>% filter(origin == "japan") %>% pull(mpg)
+
+wilcox.test(usa, japon)
+```
+
+- Tamaño del efecto:
+
+```{r effsize-usa-japon}
+library(rstatix)
+
+df %>%
+  filter(origin %in% c("usa", "japan")) %>%
+  mutate(origin = droplevels(as.factor(origin))) %>%
+  wilcox_effsize(mpg ~ origin)
+```
+
+
+
+## Tabla de contingencia: cylinders vs origin
+
+Se evalúa si el número de cilindros está asociado con el origen del vehículo:
+
+```{r tabla-contingencia-cyl-origin}
+tabla_cyl_origin <- table(df$cylinders, df$origin)
+tabla_cyl_origin
+```
+
+```{r chi-cuadrado-cyl-origin}
+chisq.test(tabla_cyl_origin, simulate.p.value = TRUE, B = 10000)
+```
+
